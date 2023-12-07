@@ -1,0 +1,6 @@
+@University.Services.GradeAPI_HostAddress = http://localhost:5072
+
+GET {{University.Services.GradeAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

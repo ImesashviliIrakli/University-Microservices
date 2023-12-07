@@ -1,0 +1,6 @@
+@University.Services.AuthAPI_HostAddress = http://localhost:5011
+
+GET {{University.Services.AuthAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
