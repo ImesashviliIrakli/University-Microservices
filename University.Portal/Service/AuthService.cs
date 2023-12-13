@@ -5,7 +5,7 @@ using static University.Portal.Utility.SD;
 
 namespace University.Portal.Service
 {
-    public class AuthService
+    public class AuthService : IAuthService
     {
 
         private readonly IBaseService _baseService;

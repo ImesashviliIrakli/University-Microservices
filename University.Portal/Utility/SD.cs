@@ -3,11 +3,8 @@
     public class SD
     {
         // API Urls
-        public static string CouponAPIBase { get; set; }
+        public static string CourseAPIBase { get; set; }
         public static string AuthAPIBase { get; set; }
-        public static string ProductAPIBase { get; set; }
-        public static string ShoppingCartAPIBase { get; set; }
-        public static string OrderAPIBase { get; set; }
 
         // API Types
         public enum ApiType
