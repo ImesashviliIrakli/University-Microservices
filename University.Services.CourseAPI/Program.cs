@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using University.Services.CourseAPI.Data;
 using University.Services.CourseAPI.Extensions;
+using University.Services.CourseAPI.Repositories;
+using University.Services.CourseAPI.Repositories.IRepositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -40,6 +42,13 @@ builder.Services.AddSwaggerGen(x =>
         }
     });
 });
+
+// AutoMapper
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+// Scopes
+builder.Services.AddScoped<IFacultyRepository, FacultyRepository>();
+builder.Services.AddScoped<ICourseRepository, CourseRepository>();
 
 // Authentication
 builder.AddAppAuthentication();
