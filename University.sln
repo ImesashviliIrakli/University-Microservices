@@ -7,21 +7,23 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Frontend", "Frontend", "{82
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{D293E5B9-757D-40F6-B783-F99857D032E3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "University.Services.AuthAPI", "University.Services.AuthAPI\University.Services.AuthAPI.csproj", "{21E6808D-3B2E-49A6-920D-87DF1198BE1D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "University.Services.AuthAPI", "University.Services.AuthAPI\University.Services.AuthAPI.csproj", "{21E6808D-3B2E-49A6-920D-87DF1198BE1D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "University.Services.StudentAPI", "University.Services.StudentAPI\University.Services.StudentAPI.csproj", "{846157EA-9459-4684-9F1D-38FB8E493A0F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "University.Services.StudentAPI", "University.Services.StudentAPI\University.Services.StudentAPI.csproj", "{846157EA-9459-4684-9F1D-38FB8E493A0F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "University.Services.TeacherAPI", "University.Services.TeacherAPI\University.Services.TeacherAPI.csproj", "{586EF978-975F-4611-8AF8-4F975B6CEB8C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "University.Services.TeacherAPI", "University.Services.TeacherAPI\University.Services.TeacherAPI.csproj", "{586EF978-975F-4611-8AF8-4F975B6CEB8C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "University.Services.CourseAPI", "University.Services.CourseAPI\University.Services.CourseAPI.csproj", "{59895F71-0ED0-423A-A6CD-D6BF32A5F6BC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "University.Services.CourseAPI", "University.Services.CourseAPI\University.Services.CourseAPI.csproj", "{59895F71-0ED0-423A-A6CD-D6BF32A5F6BC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "University.Services.EnrollmentAPI", "University.Services.EnrollmentAPI\University.Services.EnrollmentAPI.csproj", "{9391DCDE-C3BC-4D16-9955-409F681172F6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "University.Services.EnrollmentAPI", "University.Services.EnrollmentAPI\University.Services.EnrollmentAPI.csproj", "{9391DCDE-C3BC-4D16-9955-409F681172F6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "University.Services.GradeAPI", "University.Services.GradeAPI\University.Services.GradeAPI.csproj", "{59C77416-840A-4189-873B-A78D77327E7C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "University.Services.GradeAPI", "University.Services.GradeAPI\University.Services.GradeAPI.csproj", "{59C77416-840A-4189-873B-A78D77327E7C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "University.Services.NotificationAPI", "University.Services.NotificationAPI\University.Services.NotificationAPI.csproj", "{05AB0251-A3EB-4C20-8933-BD55DEC8C7D5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "University.Services.NotificationAPI", "University.Services.NotificationAPI\University.Services.NotificationAPI.csproj", "{05AB0251-A3EB-4C20-8933-BD55DEC8C7D5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "University.Services.PaymentAPI", "University.Services.PaymentAPI\University.Services.PaymentAPI.csproj", "{E1DEA97F-731E-4366-BC74-74CB9B43C465}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "University.Services.PaymentAPI", "University.Services.PaymentAPI\University.Services.PaymentAPI.csproj", "{E1DEA97F-731E-4366-BC74-74CB9B43C465}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "University.Portal", "University.Portal\University.Portal.csproj", "{11D09434-B839-4402-9633-E35A08986052}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -61,6 +63,10 @@ Global
 		{E1DEA97F-731E-4366-BC74-74CB9B43C465}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E1DEA97F-731E-4366-BC74-74CB9B43C465}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E1DEA97F-731E-4366-BC74-74CB9B43C465}.Release|Any CPU.Build.0 = Release|Any CPU
+		{11D09434-B839-4402-9633-E35A08986052}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{11D09434-B839-4402-9633-E35A08986052}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{11D09434-B839-4402-9633-E35A08986052}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{11D09434-B839-4402-9633-E35A08986052}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -74,6 +80,7 @@ Global
 		{59C77416-840A-4189-873B-A78D77327E7C} = {D293E5B9-757D-40F6-B783-F99857D032E3}
 		{05AB0251-A3EB-4C20-8933-BD55DEC8C7D5} = {D293E5B9-757D-40F6-B783-F99857D032E3}
 		{E1DEA97F-731E-4366-BC74-74CB9B43C465} = {D293E5B9-757D-40F6-B783-F99857D032E3}
+		{11D09434-B839-4402-9633-E35A08986052} = {8233B451-678E-4956-8D5E-6C062BD5996D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {26F123F6-10C9-417A-BFA8-F1D5BE45B635}
