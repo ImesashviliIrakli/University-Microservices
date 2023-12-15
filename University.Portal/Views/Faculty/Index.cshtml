@@ -1,0 +1,50 @@
+﻿@model IEnumerable<FacultyDto>
+
+<div class="container">
+
+    <div>
+
+        <h1>Faculties</h1>
+
+        <br />
+
+        <a class="btn btn-success" asp-action="AddFaculty">New +</a>
+
+        <br />
+        <br />
+
+        <table id="facultyTable" class="table">
+
+            <thead class="table-dark">
+                <tr>
+                    <td>ID</td>
+                    <td>Name</td>
+                    <td>Description</td>
+                    <td>Degree</td>
+                    <td>Semester Count</td>
+                    <td></td>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.FacultyId</td>
+                        <td>@item.FacultyName</td>
+                        <td>@item.FacultyDescription</td>
+                        <td>@item.Degree</td>
+                        <td>@item.SemesterCount</td>
+                        <td></td>
+                    </tr>
+                }
+
+            </tbody>
+
+
+        </table>
+
+    </div>
+
+</div>

@@ -1,11 +1,8 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using University.Services.CourseAPI.Migrations;
 using University.Services.CourseAPI.Models;
 using University.Services.CourseAPI.Models.Dto;
-using University.Services.CourseAPI.Repositories;
 using University.Services.CourseAPI.Repositories.IRepositories;
 
 namespace University.Services.CourseAPI.Controllers
@@ -49,7 +46,7 @@ namespace University.Services.CourseAPI.Controllers
         {
             try
             {
-                if(courseId == 0)
+                if (courseId == 0)
                 {
                     _response.IsSuccess = false;
                     _response.Message = "Bad Request";
@@ -59,7 +56,7 @@ namespace University.Services.CourseAPI.Controllers
 
                 Course course = _courseRepository.GetCourse(courseId);
 
-                if(course == null)
+                if (course == null)
                 {
                     _response.IsSuccess = false;
                     _response.Message = "Could not find course";
@@ -81,7 +78,7 @@ namespace University.Services.CourseAPI.Controllers
         }
 
         [HttpPost]
-        public ResponseDto Post([FromBody] CourseDto courseDto) 
+        public ResponseDto Post([FromBody] CourseDto courseDto)
         {
             try
             {
@@ -141,7 +138,7 @@ namespace University.Services.CourseAPI.Controllers
         {
             try
             {
-                if(courseId == 0 || !ModelState.IsValid)
+                if (courseId == 0 || !ModelState.IsValid)
                 {
                     _response.IsSuccess = false;
                     _response.Message = "Bad Request";
@@ -151,7 +148,7 @@ namespace University.Services.CourseAPI.Controllers
 
                 Course deletedCourse = _courseRepository.Delete(courseId);
 
-                if(deletedCourse == null)
+                if (deletedCourse == null)
                 {
                     _response.IsSuccess = false;
                     _response.Message = "Could not find course";
