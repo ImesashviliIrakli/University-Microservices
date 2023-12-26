@@ -32,6 +32,7 @@ namespace University.Portal.Controllers
             return View(faculties);
         }
 
+        #region Add new faculty
         public IActionResult AddFaculty()
         {
             return View();
@@ -56,5 +57,22 @@ namespace University.Portal.Controllers
             TempData["success"] = "Faculty added successfully";
             return RedirectToAction(nameof(Index));
         }
+
+        #endregion
+
+        #region Update existing faculty
+
+        public async Task<IActionResult> UpdateFaculty(int facultyId)
+        {
+            ResponseDto responseDto = await _facultyService.GetFacultyById(facultyId);
+
+            string resultString = Convert.ToString(responseDto.Result);
+
+            FacultyDto facultyDto = JsonConvert.DeserializeObject<FacultyDto>(resultString);
+
+            return View(facultyDto);
+        }
+
+        #endregion
     }
 }

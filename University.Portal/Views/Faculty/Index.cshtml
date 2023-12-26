@@ -8,7 +8,7 @@
 
         <br />
 
-        <a class="btn btn-success" asp-action="AddFaculty">New +</a>
+        <a class="btn btn-success" asp-action="AddFaculty">NEW</a>
 
         <br />
         <br />
@@ -18,11 +18,11 @@
             <thead class="table-dark">
                 <tr>
                     <td>ID</td>
-                    <td>Name</td>
-                    <td>Description</td>
-                    <td>Degree</td>
-                    <td>Semester Count</td>
-                    <td></td>
+                    <td>NAME</td>
+                    <td>DESCRIPTION</td>
+                    <td>DEGREE</td>
+                    <td>SEMESTER COUNT</td>
+                    <td>UPDATE</td>
                 </tr>
             </thead>
 
@@ -36,7 +36,9 @@
                         <td>@item.FacultyDescription</td>
                         <td>@item.Degree</td>
                         <td>@item.SemesterCount</td>
-                        <td></td>
+                        <td>
+                            <a class="btn btn-info" asp-action="UpdateFaculty" asp-route-facultyId="@item.FacultyId">UPDATE</a>
+                        </td>
                     </tr>
                 }
 
