@@ -33,11 +33,12 @@
                     <tr>
                         <td>@item.FacultyId</td>
                         <td>@item.FacultyName</td>
-                        <td>@item.FacultyDescription</td>
+                        <td>@Html.Raw(item.FacultyDescription)</td>
                         <td>@item.Degree</td>
                         <td>@item.SemesterCount</td>
-                        <td>
-                            <a class="btn btn-info" asp-action="UpdateFaculty" asp-route-facultyId="@item.FacultyId">UPDATE</a>
+                        <td class="row">
+                            <a class="btn btn-info col" asp-action="UpdateFaculty" asp-route-facultyId="@item.FacultyId">UPDATE</a>
+                            <a class="btn btn-danger col" asp-action="DeleteFaculty" asp-route-facultyId="@item.FacultyId">Delete</a>
                         </td>
                     </tr>
                 }

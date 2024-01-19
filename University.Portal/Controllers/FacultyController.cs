@@ -32,7 +32,6 @@ namespace University.Portal.Controllers
             return View(faculties);
         }
 
-        #region Add new faculty
         public IActionResult AddFaculty()
         {
             return View();
@@ -58,10 +57,6 @@ namespace University.Portal.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        #endregion
-
-        #region Update existing faculty
-
         public async Task<IActionResult> UpdateFaculty(int facultyId)
         {
             ResponseDto responseDto = await _facultyService.GetFacultyById(facultyId);
@@ -73,6 +68,38 @@ namespace University.Portal.Controllers
             return View(facultyDto);
         }
 
-        #endregion
+        [HttpPost]
+        public async Task<IActionResult> UpdateFaculty(FacultyDto facultyDto)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(facultyDto);
+            }
+
+            ResponseDto responseDto = await _facultyService.Update(facultyDto);
+
+            if (responseDto == null || !responseDto.IsSuccess)
+            {
+                TempData["error"] = "Something went wrong";
+                return View(facultyDto);
+            }
+
+            TempData["success"] = "Faculty added successfully";
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteFaculty(int facultyId)
+        {
+            ResponseDto responseDto = await _facultyService.Delete(facultyId);
+
+            if (responseDto == null || !responseDto.IsSuccess)
+            {
+                TempData["error"] = "Something went wrong";
+            }
+
+            TempData["success"] = "Faculty added successfully";
+            return RedirectToAction(nameof(Index));
+        }
     }
 }
