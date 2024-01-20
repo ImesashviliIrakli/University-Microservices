@@ -56,7 +56,7 @@ namespace University.Portal.Service
         {
             return await _baseService.SendAsync(new RequestDto()
             {
-                ApiType = ApiType.GET,
+                ApiType = ApiType.DELETE,
                 Url = SD.CourseAPIBase + $"/api/Faculty/{facultyId}"
             });
         }

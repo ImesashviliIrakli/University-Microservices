@@ -6,28 +6,23 @@
 
         <h1>Faculties</h1>
 
-        <br />
+        <div class="mb-3">
+            <a class="btn btn-success" asp-action="AddFaculty">New Faculty</a>
+        </div>
 
-        <a class="btn btn-success" asp-action="AddFaculty">NEW</a>
-
-        <br />
-        <br />
-
-        <table id="facultyTable" class="table">
-
+        <table class="table">
             <thead class="table-dark">
                 <tr>
-                    <td>ID</td>
-                    <td>NAME</td>
-                    <td>DESCRIPTION</td>
-                    <td>DEGREE</td>
-                    <td>SEMESTER COUNT</td>
-                    <td>UPDATE</td>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Degree</th>
+                    <th>Semester Count</th>
+                    <th>Action</th>
                 </tr>
             </thead>
 
             <tbody>
-
                 @foreach (var item in Model)
                 {
                     <tr>
@@ -36,16 +31,17 @@
                         <td>@Html.Raw(item.FacultyDescription)</td>
                         <td>@item.Degree</td>
                         <td>@item.SemesterCount</td>
-                        <td class="row">
-                            <a class="btn btn-info col" asp-action="UpdateFaculty" asp-route-facultyId="@item.FacultyId">UPDATE</a>
-                            <a class="btn btn-danger col" asp-action="DeleteFaculty" asp-route-facultyId="@item.FacultyId">Delete</a>
+                        <td>
+                            <div class="btn-group" role="group">
+                                <a class="btn btn-primary" asp-action="UpdateFaculty" asp-route-facultyId="@item.FacultyId">Update</a>
+                                <form method="post" asp-action="DeleteFaculty" asp-route-facultyId="@item.FacultyId">
+                                    <button type="submit" class="btn btn-danger" onclick="return confirm('Delete this faculty?')">Delete</button>
+                                </form>
+                            </div>
                         </td>
                     </tr>
                 }
-
             </tbody>
-
-
         </table>
 
     </div>

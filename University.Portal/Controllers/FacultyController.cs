@@ -97,8 +97,10 @@ namespace University.Portal.Controllers
             {
                 TempData["error"] = "Something went wrong";
             }
-
-            TempData["success"] = "Faculty added successfully";
+            else
+            {
+                TempData["success"] = "Faculty deleted successfully";
+            }
             return RedirectToAction(nameof(Index));
         }
     }
