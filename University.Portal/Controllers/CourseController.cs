@@ -2,7 +2,6 @@
 using Newtonsoft.Json;
 using University.Portal.Models;
 using University.Portal.Models.CourseModels;
-using University.Portal.Service;
 using University.Portal.Service.IService;
 
 namespace University.Portal.Controllers
@@ -10,9 +9,11 @@ namespace University.Portal.Controllers
     public class CourseController : Controller
     {
         private readonly ICourseService _courseService;
-        public CourseController(ICourseService courseService)
+        private readonly IFacultyService _facultyService;
+        public CourseController(ICourseService courseService, IFacultyService facultyService)
         {
             _courseService = courseService;
+            _facultyService = facultyService;
         }
 
         public async Task<IActionResult> Index()
@@ -26,13 +27,17 @@ namespace University.Portal.Controllers
             }
 
             string resultString = Convert.ToString(responseDto.Result);
-            IEnumerable<FacultyDto> faculties = JsonConvert.DeserializeObject<IEnumerable<FacultyDto>>(resultString);
+            IEnumerable<CourseDto> courses = JsonConvert.DeserializeObject<IEnumerable<CourseDto>>(resultString);
 
-            return View(faculties);
+            return View(courses);
         }
 
-        public IActionResult AddCourse()
+        public async Task<IActionResult> AddCourse()
         {
+            ResponseDto responseDto = await _facultyService.GetAllFaculties();
+            string resultString = Convert.ToString(responseDto.Result);
+            ViewBag.Faculties = JsonConvert.DeserializeObject<IEnumerable<FacultyDto>>(resultString);
+
             return View();
         }
 
@@ -52,7 +57,7 @@ namespace University.Portal.Controllers
                 return View(courseDto);
             }
 
-            TempData["success"] = "Faculty added successfully";
+            TempData["success"] = "Course added successfully";
             return RedirectToAction(nameof(Index));
         }
 
@@ -63,6 +68,11 @@ namespace University.Portal.Controllers
             string responseString = Convert.ToString(responseDto.Result);
 
             CourseDto courseDto = JsonConvert.DeserializeObject<CourseDto>(responseString);
+
+            // Get faculties
+            ResponseDto faculties = await _facultyService.GetAllFaculties();
+            string facultiesString = Convert.ToString(faculties.Result);
+            ViewBag.Faculties = JsonConvert.DeserializeObject<IEnumerable<FacultyDto>>(facultiesString);
 
             return View(courseDto);
         }
@@ -83,7 +93,7 @@ namespace University.Portal.Controllers
                 return View(courseDto);
             }
 
-            TempData["success"] = "Faculty added successfully";
+            TempData["success"] = "Course updated successfully";
             return RedirectToAction(nameof(Index));
         }
 
@@ -98,7 +108,7 @@ namespace University.Portal.Controllers
             }
             else
             {
-                TempData["success"] = "Faculty deleted successfully";
+                TempData["success"] = "Course deleted successfully";
             }
             return RedirectToAction(nameof(Index));
         }

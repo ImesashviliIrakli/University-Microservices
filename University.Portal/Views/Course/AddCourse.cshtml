@@ -1,5 +1,41 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model CourseDto
+
 @{
+    ViewData["Title"] = "Add Course";
+    var faculties = ViewBag.Faculties;
 }
+
+<h2>Add Course</h2>
+
+<form asp-action="AddCourse" method="post">
+    <div class="form-group">
+        <label asp-for="CourseName"></label>
+        <input asp-for="CourseName" class="form-kcontrol" />
+        <span asp-validation-for="CourseName" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="CourseDescription"></label>
+        <textarea asp-for="CourseDescription" class="form-control"></textarea>
+        <span asp-validation-for="CourseDescription" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Semester"></label>
+        <input asp-for="Semester" class="form-control" />
+        <span asp-validation-for="Semester" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="FacultyId"></label>
+        <select asp-for="FacultyId" asp-items="@(new SelectList(faculties, "FacultyId", "FacultyName"))" class="form-control">
+            <option value="">Select Faculty</option>
+        </select>
+        <span asp-validation-for="FacultyId" class="text-danger"></span>
+    </div>
+
+    <div class="row">
+        <button type="submit" class="btn btn-primary col">Add Course</button>
+        <a asp-action="Index" class="btn btn-info col">Back</a>
+    </div>
+</form>

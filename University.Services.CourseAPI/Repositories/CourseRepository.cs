@@ -43,7 +43,7 @@ namespace University.Services.CourseAPI.Repositories
         {
             Course course = _context.Courses.FirstOrDefault(x => x.CourseId == courseId);
 
-            if(course == null)
+            if(course != null)
             {
                 _context.Courses.Remove(course);
                 _context.SaveChanges();
