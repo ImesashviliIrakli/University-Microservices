@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using University.Services.AuthAPI.Models.Dto;
 using University.Services.AuthAPI.Service.IService;
 
@@ -63,6 +64,25 @@ namespace University.Services.AuthAPI.Controllers
 
                 return BadRequest(_response);
             }
+
+            return Ok(_response);
+        }
+
+        [Authorize(Roles = "ADMIN")]
+        [HttpGet("getusers")]
+        public IActionResult GetUsers()
+        {
+            var users = _authService.GetUsers();
+
+            if(users == null)
+            {
+                _response.IsSuccess = false;
+                _response.Message = "Could not get users";
+
+                return BadRequest(_response);
+            }
+
+            _response.Result = users;
 
             return Ok(_response);
         }

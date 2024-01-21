@@ -1,6 +1,9 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
 using University.Services.AuthAPI.Data;
+using University.Services.AuthAPI.Extensions;
 using University.Services.AuthAPI.Models;
 using University.Services.AuthAPI.Service;
 using University.Services.AuthAPI.Service.IService;
@@ -27,7 +30,35 @@ builder.Services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(x =>
+{
+    x.AddSecurityDefinition(name: "Bearer", securityScheme: new OpenApiSecurityScheme
+    {
+        Name = "Authorization",
+        Description = "Enter the bearer authorization string as following: `Bearer Generated JWT TOKEN`",
+        In = ParameterLocation.Header,
+        Type = SecuritySchemeType.ApiKey,
+        Scheme = "Bearer"
+    });
+
+    x.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Type = ReferenceType.SecurityScheme,
+                    Id = JwtBearerDefaults.AuthenticationScheme
+                }
+            }, new string[]{ }
+        }
+    });
+});
+
+// Authentication
+builder.AddAppAuthentication();
+builder.Services.AddAuthorization();
 
 var app = builder.Build();
 

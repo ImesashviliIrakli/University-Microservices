@@ -17,7 +17,9 @@
 
         // Roles
         public const string RoleAdmin = "ADMIN";
-        
+        public const string RoleStudent = "STUDENT";
+        public const string RoleTeacher = "TEACHER";
+
         // JWT
         public const string TokenCookie = "JwtToken";
      

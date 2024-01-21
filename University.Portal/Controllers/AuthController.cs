@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.IdentityModel.Tokens.Jwt;
@@ -90,6 +91,50 @@ namespace University.Portal.Controllers
             _tokenProvider.ClearToken();
 
             return RedirectToAction("Index", "Home");
+        }
+
+        [Authorize(Roles = SD.RoleAdmin)]
+        public async Task<IActionResult> Users()
+        {
+            var userDtos = new List<UserDto>();
+            ResponseDto responseDto = await _authService.GetUsers();
+
+            if(responseDto.Result != null)
+            {
+                string resultString = Convert.ToString(responseDto.Result);
+                userDtos = JsonConvert.DeserializeObject<List<UserDto>>(resultString);
+            }
+
+            return View(userDtos);
+        }
+
+        public IActionResult CreateUser()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateUser(RegistrationRequestDto registrationRequestDto)
+        {
+            ResponseDto register = await _authService.RegisterAsync(registrationRequestDto);
+
+            if (register != null && register.IsSuccess)
+            {
+                var assignRole = await _authService.AssignRoleAsync(registrationRequestDto);
+
+                if (assignRole != null && assignRole.IsSuccess)
+                {
+                    TempData["success"] = "New user was added";
+
+                    return RedirectToAction(nameof(Users));
+                }
+            }
+            else
+            {
+                TempData["error"] = register.Message;
+            }
+
+            return View(registrationRequestDto);
         }
 
         private async Task SignInAsync(LoginResponseDto loginResponseDto)

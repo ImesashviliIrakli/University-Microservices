@@ -44,6 +44,34 @@ namespace University.Services.AuthAPI.Service
             return false;
         }
 
+        public List<UserDto> GetUsers()
+        {
+            // Find the role by name (replace "Admin" with your actual role name)
+            var adminRole = _roleManager.FindByNameAsync("Admin").Result;
+
+            if (adminRole != null)
+            {
+                var adminUserIds = _userManager.GetUsersInRoleAsync(adminRole.Name).Result.Select(user => user.Id).ToList();
+
+                var usersWithoutAdmin = _userManager.Users
+                    .Where(user => !adminUserIds.Any(adminId => adminId == user.Id))
+                    .Select(user => new UserDto
+                    {
+                        ID = user.Id,
+                        Email = user.Email,
+                        FirstName = user.FirstName,
+                        LastName = user.LastName,
+                        PrivateNumber = user.PrivateNumber,
+                        PhoneNumber = user.PhoneNumber
+                    })
+                    .ToList();
+
+                return usersWithoutAdmin;
+            }
+
+            return new List<UserDto>();
+        }
+
         public async Task<LoginResponseDto> Login(LoginRequestDto loginRequestDto)
         {
             var user = _context.ApplicationUsers.FirstOrDefault(x => x.UserName.ToLower() == loginRequestDto.UserName.ToLower());

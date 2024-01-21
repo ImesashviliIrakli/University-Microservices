@@ -7,5 +7,6 @@ namespace University.Portal.Service.IService
         public Task<ResponseDto> LoginAsync(LoginRequestDto loginRequestDto);
         public Task<ResponseDto> RegisterAsync(RegistrationRequestDto registrationRequestDto);
         public Task<ResponseDto> AssignRoleAsync(RegistrationRequestDto registrationRequestDto);
+        public Task<ResponseDto> GetUsers();
     }
 }

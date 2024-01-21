@@ -42,5 +42,14 @@ namespace University.Portal.Service
                 Url = SD.AuthAPIBase + "/api/Auth/register"
             }, withBearer: false);
         }
+
+        public async Task<ResponseDto> GetUsers()
+        {
+            return await _baseService.SendAsync(new RequestDto()
+            {
+                ApiType = ApiType.GET,
+                Url = SD.AuthAPIBase + "/api/Auth/getusers"
+            });
+        }
     }
 }
