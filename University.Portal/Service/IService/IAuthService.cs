@@ -8,5 +8,8 @@ namespace University.Portal.Service.IService
         public Task<ResponseDto> RegisterAsync(RegistrationRequestDto registrationRequestDto);
         public Task<ResponseDto> AssignRoleAsync(RegistrationRequestDto registrationRequestDto);
         public Task<ResponseDto> GetUsers();
+        public Task<ResponseDto> GetUserById(string userId);
+        public Task<ResponseDto> UpdateUserAsync(UserDto userDto);
+        public Task<ResponseDto> DeleteUser(string userId);
     }
 }

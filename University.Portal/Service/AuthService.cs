@@ -51,5 +51,33 @@ namespace University.Portal.Service
                 Url = SD.AuthAPIBase + "/api/Auth/getusers"
             });
         }
+
+        public async Task<ResponseDto> GetUserById(string userId)
+        {
+            return await _baseService.SendAsync(new RequestDto()
+            {
+                ApiType = ApiType.GET,
+                Url = SD.AuthAPIBase + $"/api/Auth/getuserbyid/{userId}"
+            });
+        }
+
+        public async Task<ResponseDto> UpdateUserAsync(UserDto userDto)
+        {
+            return await _baseService.SendAsync(new RequestDto()
+            {
+                ApiType = ApiType.PUT,
+                Data = userDto,
+                Url = SD.AuthAPIBase + "/api/Auth/updateuser"
+            });
+        }
+
+        public async Task<ResponseDto> DeleteUser(string userId)
+        {
+            return await _baseService.SendAsync(new RequestDto()
+            {
+                ApiType = ApiType.DELETE,
+                Url = SD.AuthAPIBase + $"/api/Auth/deleteuser/{userId}"
+            });
+        }
     }
 }

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Win32;
 using Newtonsoft.Json;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -135,6 +136,49 @@ namespace University.Portal.Controllers
             }
 
             return View(registrationRequestDto);
+        }
+
+        public async Task<IActionResult> UpdateUser(string userId)
+        {
+            ResponseDto responseDto = await _authService.GetUserById(userId);
+
+            if (responseDto.Result != null)
+            {
+                string resultString = Convert.ToString(responseDto.Result);
+                UserDto userDto = JsonConvert.DeserializeObject<UserDto>(resultString);
+
+                return View(userDto);
+            }
+
+            return NotFound();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> UpdateUser(UserDto userDto)
+        {
+            ResponseDto responseDto = await _authService.UpdateUserAsync(userDto);
+
+            if(responseDto != null && responseDto.IsSuccess)
+            {
+                TempData["success"] = "User Was updated";
+                return RedirectToAction(nameof(Users));
+            }
+
+            TempData["error"] = responseDto.Message;
+            return View(userDto);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteUser(string userId)
+        {
+            ResponseDto responseDto = await _authService.DeleteUser(userId);
+
+            if (responseDto != null && responseDto.IsSuccess)
+                TempData["success"] = "User Was deleted";
+            else            
+                TempData["error"] = responseDto.Message;
+
+            return RedirectToAction(nameof(Users));
         }
 
         private async Task SignInAsync(LoginResponseDto loginResponseDto)

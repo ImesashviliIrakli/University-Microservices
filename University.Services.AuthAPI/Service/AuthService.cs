@@ -44,6 +44,22 @@ namespace University.Services.AuthAPI.Service
             return false;
         }
 
+        public async Task<bool> DeleteUser(string userId)
+        {
+            var user = await _userManager.FindByIdAsync(userId);
+
+            var deleteUser = await _userManager.DeleteAsync(user);
+
+            return deleteUser.Succeeded;
+        }
+
+        public async Task<ApplicationUser> GetUserById(string userId)
+        {
+            var user = await _userManager.FindByIdAsync(userId);
+
+            return user;
+        }
+
         public List<UserDto> GetUsers()
         {
             // Find the role by name (replace "Admin" with your actual role name)
@@ -149,5 +165,11 @@ namespace University.Services.AuthAPI.Service
             }
         }
 
+        public async Task<bool> UpdateUser(ApplicationUser user)
+        {
+            var result = await _userManager.UpdateAsync(user);
+
+            return result.Succeeded;
+        }
     }
 }

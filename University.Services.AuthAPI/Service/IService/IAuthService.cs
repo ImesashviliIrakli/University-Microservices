@@ -9,5 +9,9 @@ namespace University.Services.AuthAPI.Service.IService
         public Task<LoginResponseDto> Login(LoginRequestDto loginRequestDto);
         public Task<bool> AssignRole(string email, string roleName);
         public List<UserDto> GetUsers();
+        public Task<ApplicationUser> GetUserById(string userId);
+        public Task<bool> UpdateUser(ApplicationUser user);
+        public Task<bool> DeleteUser(string userId);
+
     }
 }
