@@ -1,11 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace University.Services.StudentAPI.Models;
+namespace University.Services.TeacherAPI.Models;
 
-public class Student
+public class Teacher
 {
     [Key]
-    public Guid StudentId { get; set; }
+    public Guid TeacherId { get; set; }
     [Required]
     public Guid UserId { get; set; }
     [Required]
@@ -14,15 +14,10 @@ public class Student
     public string LastName { get; set; }
     [Required]
     public string Email { get; set; }
-    [Required] 
+    [Required]
     public string PhoneNumber { get; set; }
     [Required]
     public string PrivateNumber { get; set; }
     [Required]
-    public DateTime DateOfBirth { get; set; }
-    [Required]
-    public DateTime EnrollmentDate { get; set; }
-    [Required]
-    public string Major { get; set; }
+    public int YearsOfExperience { get; set; }
 }
-
