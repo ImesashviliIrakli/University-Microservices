@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using University.Services.TeacherAPI.Models;
 using University.Services.TeacherAPI.Models.Dto;
@@ -8,6 +9,7 @@ namespace University.Services.TeacherAPI.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
+[Authorize(Roles = "TEACHER")]
 public class TeacherController : ControllerBase
 {
     private readonly ITeacherRepository _teacherRepository;
