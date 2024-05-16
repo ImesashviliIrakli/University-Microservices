@@ -1,7 +1,37 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
+using University.Shared.Interfaces.AuthInterfaces;
+using University.Shared.Services.AuthServices;
+using University.Shared.Utility;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+// HttpClient
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddHttpClient();
+builder.Services.AddHttpClient<IAuthService, AuthService>();
+
+//Scopes
+builder.Services.AddScoped<IBaseService, BaseService>();
+builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<ITokenProvider, TokenProvider>();
+
+// Authentication
+builder.Services.AddAuthentication("TeacherCookie")
+    .AddCookie("TeacherCookie", options =>
+    {
+        options.Cookie.Name = "TeacherAuthCookie";
+        options.ExpireTimeSpan = TimeSpan.FromHours(10);
+        options.LoginPath = "/Auth/Login";
+        options.AccessDeniedPath = "/Auth/AccessDenied";
+    });
+
+// API Urls
+SD.AuthAPIBase = builder.Configuration["ServiceUrls:AuthAPI"];
+SD.CourseAPIBase = builder.Configuration["ServiceUrls:CourseAPI"];
+SD.TeacherAPIBase = builder.Configuration["ServiceUrls:TeacherAPI"];
 
 var app = builder.Build();
 
@@ -9,7 +39,6 @@ var app = builder.Build();
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 

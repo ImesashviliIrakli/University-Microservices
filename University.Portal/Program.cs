@@ -1,7 +1,9 @@
-using University.Portal.Service.IService;
-using University.Portal.Service;
-using University.Portal.Utility;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using University.Shared.Interfaces.AuthInterfaces;
+using University.Shared.Interfaces.CourseInterfaces;
+using University.Shared.Services.AuthServices;
+using University.Shared.Services.CourseServices;
+using University.Shared.Utility;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,9 +24,10 @@ builder.Services.AddScoped<ICourseService, CourseService>();
 builder.Services.AddScoped<IFacultyService, FacultyService>();
 
 // Authentication
-builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-    .AddCookie(options =>
+builder.Services.AddAuthentication("PortalCookie")
+    .AddCookie("PortalCookie", options =>
     {
+        options.Cookie.Name = "PortalAuthCookie";
         options.ExpireTimeSpan = TimeSpan.FromHours(10);
         options.LoginPath = "/Auth/Login";
         options.AccessDeniedPath = "/Auth/AccessDenied";
