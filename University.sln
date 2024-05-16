@@ -27,6 +27,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "University.Portal", "Univer
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "University.Teacher", "University.Teacher\University.Teacher.csproj", "{1ECF48FF-836E-4B19-A9EC-4818B36B9766}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{71C5C5F3-5723-46F3-B11C-2A33A33B4606}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "University.Shared", "University.Shared\University.Shared.csproj", "{85820D2D-CEEF-4F4E-A6A6-8FC181DA5A54}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -73,6 +77,10 @@ Global
 		{1ECF48FF-836E-4B19-A9EC-4818B36B9766}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1ECF48FF-836E-4B19-A9EC-4818B36B9766}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1ECF48FF-836E-4B19-A9EC-4818B36B9766}.Release|Any CPU.Build.0 = Release|Any CPU
+		{85820D2D-CEEF-4F4E-A6A6-8FC181DA5A54}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{85820D2D-CEEF-4F4E-A6A6-8FC181DA5A54}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{85820D2D-CEEF-4F4E-A6A6-8FC181DA5A54}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{85820D2D-CEEF-4F4E-A6A6-8FC181DA5A54}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -88,6 +96,7 @@ Global
 		{E1DEA97F-731E-4366-BC74-74CB9B43C465} = {D293E5B9-757D-40F6-B783-F99857D032E3}
 		{11D09434-B839-4402-9633-E35A08986052} = {8233B451-678E-4956-8D5E-6C062BD5996D}
 		{1ECF48FF-836E-4B19-A9EC-4818B36B9766} = {8233B451-678E-4956-8D5E-6C062BD5996D}
+		{85820D2D-CEEF-4F4E-A6A6-8FC181DA5A54} = {71C5C5F3-5723-46F3-B11C-2A33A33B4606}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {26F123F6-10C9-417A-BFA8-F1D5BE45B635}
