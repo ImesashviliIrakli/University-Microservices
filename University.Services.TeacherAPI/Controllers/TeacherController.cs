@@ -76,6 +76,35 @@ public class TeacherController : ControllerBase
         }
     }
 
+    [HttpGet("GetByUserId/{userId}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    public async Task<ActionResult<ResponseDto>> GetByUserId(Guid userId)
+    {
+        try
+        {
+            var teacher = await _teacherRepository.GetByUserId(userId);
+
+            if (teacher == null)
+            {
+                _response.IsSuccess = false;
+                _response.Message = "Profile not found, You must create profile";
+                return StatusCode(StatusCodes.Status404NotFound, _response);
+            }
+
+            _response.Result = _mapper.Map<TeacherDto>(teacher);
+
+            return Ok(_response);
+        }
+        catch (Exception ex)
+        {
+            _response.IsSuccess = false;
+            _response.Message = ex.Message;
+            return StatusCode(StatusCodes.Status500InternalServerError, _response);
+        }
+    }
+
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]

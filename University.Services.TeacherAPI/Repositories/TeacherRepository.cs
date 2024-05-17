@@ -23,6 +23,12 @@ namespace University.Services.TeacherAPI.Repositories
         {
             return await _db.Teachers.FirstOrDefaultAsync(t => t.TeacherId == id);
         }
+
+        public async Task<Teacher> GetByUserId(Guid userId)
+        {
+            return await _db.Teachers.FirstOrDefaultAsync(t => t.UserId == userId);
+        }
+
         public async Task<Teacher> Create(Teacher teacher)
         {
             await _db.Teachers.AddAsync(teacher);
