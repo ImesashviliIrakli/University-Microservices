@@ -22,6 +22,11 @@ public class TeacherController : Controller
     {
         var userId = User.FindFirstValue(JwtRegisteredClaimNames.Sub);
         var responseDto = await _teacherService.GetTeacherProfile(userId);
+        
+        if (responseDto.Result == null)
+        {
+            return View();
+        }
 
         var teacherDto = JsonConvert.DeserializeObject<TeacherDto>(responseDto.Result.ToString());
 
