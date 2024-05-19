@@ -1,7 +1,9 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using University.Shared.Interfaces.AuthInterfaces;
+using University.Shared.Interfaces.CourseInterfaces;
 using University.Shared.Interfaces.TeacherInterfaces;
 using University.Shared.Services.AuthServices;
+using University.Shared.Services.CourseServices;
 using University.Shared.Services.TeacherServices;
 using University.Shared.Utility;
 
@@ -20,6 +22,10 @@ builder.Services.AddScoped<IBaseService, BaseService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<ITokenProvider, TokenProvider>();
 builder.Services.AddScoped<ITeacherInterface, TeacherService>();
+builder.Services.AddScoped<IFacultyService, FacultyService>();
+builder.Services.AddScoped<ICourseService, CourseService>();
+
+builder.Services.AddScoped<ITeacherCoursesInterface, TeacherCoursesService>();
 
 // Authentication
 builder.Services.AddAuthentication("TeacherCookie")

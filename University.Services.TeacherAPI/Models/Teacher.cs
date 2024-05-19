@@ -20,4 +20,6 @@ public class Teacher
     public string PrivateNumber { get; set; }
     [Required]
     public int YearsOfExperience { get; set; }
+
+    public ICollection<Course> Courses { get; set; }
 }

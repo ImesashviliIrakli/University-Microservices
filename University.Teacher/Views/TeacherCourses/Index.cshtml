@@ -1,0 +1,115 @@
+﻿@model List<TeacherCoursesDto>
+
+@{
+    ViewData["Title"] = "My Courses";
+}
+
+<div class="container mt-5">
+    <h1 class="mb-4">My Courses</h1>
+
+    @if (Model == null || !Model.Any())
+    {
+        <div class="alert alert-warning" role="alert">
+            <h4 class="alert-heading">No Courses Found</h4>
+            <p>You currently do not have any courses assigned. Please add a course.</p>
+        </div>
+
+        <form asp-action="AddCourse" method="post" class="mt-4">
+            @Html.AntiForgeryToken()
+
+            <div class="form-group">
+                <label for="CourseId">Course</label>
+                <select class="form-control" id="CourseId" name="CourseId" required>
+                    <option value="">Select a course</option>
+                </select>
+                <input type="hidden" id="CourseName" name="CourseName" />
+                <input type="hidden" id="CourseDescription" name="CourseDescription" />
+            </div>
+
+            <div class="form-group">
+                <label for="Semester">Semester</label>
+                <input type="number" class="form-control" id="Semester" name="Semester" required />
+            </div>
+
+            <div class="form-group">
+                <label for="FacultyId">Faculty</label>
+                <select class="form-control" id="FacultyId" name="FacultyId" required>
+                    <option value="">Select a faculty</option>
+                </select>
+                <input type="hidden" id="FacultyName" name="FacultyName" />
+            </div>
+
+            <button type="submit" class="btn btn-primary">Add Course</button>
+        </form>
+    }
+    else
+    {
+        <table class="table table-bordered mt-4">
+            <thead>
+                <tr>
+                    <th>Course Name</th>
+                    <th>Course Description</th>
+                    <th>Semester</th>
+                    <th>Faculty</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var course in Model)
+                {
+                    <tr>
+                        <td>@course.CourseName</td>
+                        <td>@course.CourseDescription</td>
+                        <td>@course.Semester</td>
+                        <td>@course.FacultyName</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            // Populate courses dropdown
+            $.getJSON('@Url.Action("GetCourses", "TeacherCourses")', function (data) {
+                console.log("Courses:", data);
+
+                var courseSelect = $('#CourseId');
+                $.each(data, function (index, item) {
+                    courseSelect.append($('<option>', {
+                        value: item.courseId, // Ensure this matches the property name in your CourseDto
+                        text: item.courseName, // Ensure this matches the property name in your CourseDto
+                        "data-description": item.courseDescription // Store course description in a data attribute
+                    }));
+                });
+            });
+
+            // Populate faculties dropdown
+            $.getJSON('@Url.Action("GetFaculties", "TeacherCourses")', function (data) {
+                console.log("Faculties:", data);
+
+                var facultySelect = $('#FacultyId');
+                $.each(data, function (index, item) {
+                    facultySelect.append($('<option>', {
+                        value: item.facultyId, // Ensure this matches the property name in your FacultyDto
+                        text: item.facultyName // Ensure this matches the property name in your FacultyDto
+                    }));
+                });
+            });
+
+            // Set hidden fields when course is selected
+            $('#CourseId').change(function () {
+                var selectedCourse = $(this).find(':selected');
+                $('#CourseName').val(selectedCourse.text());
+                $('#CourseDescription').val(selectedCourse.data('description'));
+            });
+
+            // Set hidden fields when faculty is selected
+            $('#FacultyId').change(function () {
+                var selectedFaculty = $(this).find(':selected');
+                $('#FacultyName').val(selectedFaculty.text());
+            });
+        });
+    </script>
+}

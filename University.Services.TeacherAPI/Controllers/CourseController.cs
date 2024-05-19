@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 using University.Services.TeacherAPI.Models;
 using University.Services.TeacherAPI.Models.Dto;
 using University.Services.TeacherAPI.Repositories.IRepositories;
@@ -61,6 +63,36 @@ namespace University.Services.TeacherAPI.Controllers
                     _response.Message = "Course not found";
                     return NotFound(_response);
                 }
+
+                var result = _mapper.Map<CourseDto>(course);
+
+                _response.Result = result;
+
+                return Ok(_response);
+            }
+            catch (Exception ex)
+            {
+                _response.IsSuccess = false;
+                _response.Message = ex.Message;
+
+                return StatusCode(StatusCodes.Status500InternalServerError, _response);
+            }
+        }
+
+        [HttpGet("GetByUserId")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<ResponseDto>> GetByUserId()
+        {
+            try
+            {
+                var userId = User.FindFirstValue(JwtRegisteredClaimNames.Sub);
+
+                var course = await _courseRepository.GetByUserId(userId);
+
+                if (course == null || course.Count == 0)
+                    return Ok(_response);
 
                 var result = _mapper.Map<CourseDto>(course);
 

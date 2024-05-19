@@ -56,4 +56,9 @@ public class CourseRepository : ICourseRepository
             return false;
         }
     }
+
+    public async Task<List<Course>> GetByUserId(string userId)
+    {
+        return await _db.Courses.Where(x => x.UserId.ToString() == userId).ToListAsync();
+    }
 }

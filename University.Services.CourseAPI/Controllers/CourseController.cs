@@ -9,7 +9,7 @@ namespace University.Services.CourseAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(Roles = "ADMIN")]
+    [Authorize]
     public class CourseController : ControllerBase
     {
         private readonly ICourseRepository _courseRepository;

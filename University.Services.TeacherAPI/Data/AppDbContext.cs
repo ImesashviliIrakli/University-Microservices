@@ -9,4 +9,12 @@ public class AppDbContext : DbContext
 
     public DbSet<Teacher> Teachers { get; set; }
     public DbSet<Course> Courses { get; set; }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<Course>()
+            .HasOne(c => c.Teacher)
+            .WithMany(t => t.Courses)
+            .HasForeignKey(c => c.UserId);
+    }
 }
